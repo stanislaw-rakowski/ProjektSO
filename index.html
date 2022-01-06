@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Projekt | SO</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div class="title logo-title">
+        <h1 class="logo">Projekt SO</h1>
+    </div>
+    <div class="title alg-title">
+        <h2>FCFS</h2>
+    </div>
+    <div class="window">
+        <div class="content-window">
+            <div class="section left-section">
+                <div class="range-div">
+                    <p>number of processes</p>
+                    <div>
+                        <input class="process-count-range" type="range" min="2" max="10" value="4">
+                        <p class="process-count-output">5</p>
+                    </div>
+                </div>
+                <div class="inputs-titles-div">
+                    <p>process</p>
+                    <p>duration</p>
+                    <p>arrival time</p>
+                </div>
+                <div class="inputs-div">
+                    <div class="input-row">
+                        <p>1</p>
+                        <input class="duration-input" type="number">
+                        <input class="arrival-input" type="number">
+                    </div>
+                </div>
+                <div class="compute-div">
+                    <button class="compute-btn">COMPUTE</button>
+                </div>
+            </div>
+            <div class="section right-section">
+                <div class="result-title-div">
+                    <h3 class="result-title">Average waiting time</h3>
+                </div>
+                <div class="result">
+                    <p class="waiting-time-result">answer</p>
+                </div>
+                <div class="result-title-div">
+                    <h3 class="result-title">Average turn around time</h3>
+                </div>
+                <div class="result">
+                    <p class="turn-around-result">answer</p>
+                </div>
+                <div class="compare-div">
+                    <label class="container">COMPARE
+                        <input class="compare-checkbox" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="App.js" defer></script>
+</body>
+
+</html>
