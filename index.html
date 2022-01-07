@@ -40,13 +40,13 @@
                 <div class="inputs-div">
                     <div class="input-row">
                         <p>P1</p>
-                        <input class="duration-input duration-input-P1" type="number">
-                        <input class="arrival-input arrival-input-P1" type="number">
+                        <input class="duration-input duration-input-P1" type="number" min="1">
+                        <input class="arrival-input arrival-input-P1" type="number" min="0">
                     </div>
                     <div class="input-row">
                         <p>P2</p>
-                        <input class="duration-input duration-input-P2" type="number">
-                        <input class="arrival-input arrival-input-P2" type="number">
+                        <input class="duration-input duration-input-P2" type="number" min="1">
+                        <input class="arrival-input arrival-input-P2" type="number" min="0">
                     </div>
                 </div>
                 <div class="randomize-div">
@@ -54,6 +54,7 @@
                         <img src="refresh.png" alt="refresh">
                     </button>
                     <p>RANDOM DATA</p>
+                    <button class="clear-btn">CLEAR</button>
                 </div>
                 <div class="compute-div">
                     <button class="compute-btn">COMPUTE</button>
@@ -64,13 +65,13 @@
                     <h3 class="result-title">Average waiting time</h3>
                 </div>
                 <div class="result">
-                    <p class="waiting-time-result">answer</p>
+                    <p class="waiting-time-result">...</p>
                 </div>
                 <div class="result-title-div">
                     <h3 class="result-title">Average turn around time</h3>
                 </div>
                 <div class="result">
-                    <p class="turn-around-result">answer</p>
+                    <p class="turn-around-result">...</p>
                 </div>
                 <div class="compare-div">
                     <label class="container">COMPARE
@@ -84,6 +85,7 @@
 
 
     <script src="App.js" defer></script>
+    <script type="module" src="algorithm/FCFS.js"></script>
 </body>
 
 </html>

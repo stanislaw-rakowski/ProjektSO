@@ -114,7 +114,7 @@ body * {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #04AA6D;
+    background: #79beb3;
     cursor: pointer;
 }
 
@@ -186,6 +186,24 @@ body * {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.clear-btn {
+    position: absolute;
+    right: 12%;
+    padding: 0.5rem 1rem;
+    background-color: #79beb3;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: 100ms ease-in-out;
+}
+
+.clear-btn:hover {
+    background-color: #2fc4ab;
+    transition: 100ms ease-in-out;
+    transform: scale(1.05);
 }
 
 .randomize-div p {
@@ -209,7 +227,7 @@ body * {
 .random-data-btn:hover {
     background-color: #2fc4ab;
     transition: 100ms ease-in-out;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .random-data-btn img {
@@ -249,6 +267,10 @@ body * {
     justify-content: center;
 }
 
+.result-title-div:first-of-type {
+    margin-top: 2rem;
+}
+
 .result-title {
     font-size: 1.4rem;
 }
@@ -259,6 +281,10 @@ body * {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.result p {
+    font-size: 1.7rem;
 }
 
 .compare-div {

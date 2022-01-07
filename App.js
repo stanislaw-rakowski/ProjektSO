@@ -1,7 +1,6 @@
 const processCountSlider = document.querySelector('.process-count-range');
 const countOutput = document.querySelector('.process-count-output');
 const compareCheckbox = document.querySelector('.compare-checkbox');
-const computeBtn = document.querySelector('.compute-btn');
 const inputsDiv = document.querySelector('.inputs-div');
 
 countOutput.textContent = processCountSlider.value;
@@ -16,8 +15,8 @@ processCountSlider.oninput = function() {
       el = `
       <div class="input-row">
         <p>P${i}</p>
-        <input class="duration-input duration-input-P${i}" type="number">
-        <input class="arrival-input arrival-input-P${i}" type="number">
+        <input class="duration-input duration-input-P${i}" type="number" min="1">
+        <input class="arrival-input arrival-input-P${i}" type="number" min="0">
       </div>`;
 
       inputsDiv.innerHTML += el;
@@ -33,6 +32,3 @@ compareCheckbox.addEventListener('change', function() {
     }
 });
 
-computeBtn.addEventListener('click', () => {
-    console.log('compute')
-});
