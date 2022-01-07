@@ -28,7 +28,7 @@
                 <div class="range-div">
                     <p>number of processes</p>
                     <div>
-                        <input class="process-count-range" type="range" min="2" max="10" value="4">
+                        <input class="process-count-range" type="range" min="2" max="20" value="2">
                         <p class="process-count-output">5</p>
                     </div>
                 </div>
@@ -39,10 +39,21 @@
                 </div>
                 <div class="inputs-div">
                     <div class="input-row">
-                        <p>1</p>
-                        <input class="duration-input" type="number">
-                        <input class="arrival-input" type="number">
+                        <p>P1</p>
+                        <input class="duration-input duration-input-P1" type="number">
+                        <input class="arrival-input arrival-input-P1" type="number">
                     </div>
+                    <div class="input-row">
+                        <p>P2</p>
+                        <input class="duration-input duration-input-P2" type="number">
+                        <input class="arrival-input arrival-input-P2" type="number">
+                    </div>
+                </div>
+                <div class="randomize-div">
+                    <button class="random-data-btn">
+                        <img src="refresh.png" alt="refresh">
+                    </button>
+                    <p>RANDOM DATA</p>
                 </div>
                 <div class="compute-div">
                     <button class="compute-btn">COMPUTE</button>
