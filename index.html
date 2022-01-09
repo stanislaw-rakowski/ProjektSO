@@ -19,17 +19,18 @@
     <div class="title logo-title">
         <h1 class="logo">Projekt SO</h1>
     </div>
-    <div class="title alg-title">
+    <div class="title alg-title-fcfs">
         <h2>FCFS</h2>
     </div>
-    <div class="window">
-        <div class="content-window">
+    <div class="window window-fcfs">
+        <div class="content-window content-window-fcfs">
             <div class="section left-section">
                 <div class="range-div">
                     <p>number of processes</p>
                     <div>
-                        <input class="process-count-range" type="range" min="2" max="20" value="2">
-                        <p class="process-count-output">5</p>
+                        <input class="process-count-range process-count-range-fcfs" type="range" min="2" max="20"
+                            value="2">
+                        <p class="process-count-output process-count-output-fcfs"></p>
                     </div>
                 </div>
                 <div class="inputs-titles-div">
@@ -37,27 +38,27 @@
                     <p>duration</p>
                     <p>arrival time</p>
                 </div>
-                <div class="inputs-div">
-                    <div class="input-row">
+                <div class="inputs-div inputs-div-fcfs">
+                    <div class="input-row input-row-fcfs">
                         <p>P1</p>
-                        <input class="duration-input duration-input-P1" type="number" min="1">
-                        <input class="arrival-input arrival-input-P1" type="number" min="0">
+                        <input class="fcfs-duration-input fcfs-duration-input-P1" type="number" min="1">
+                        <input class="fcfs-arrival-input fcfs-arrival-input-P1" type="number" min="0">
                     </div>
-                    <div class="input-row">
+                    <div class="input-row input-row-fcfs">
                         <p>P2</p>
-                        <input class="duration-input duration-input-P2" type="number" min="1">
-                        <input class="arrival-input arrival-input-P2" type="number" min="0">
+                        <input class="fcfs-duration-input fcfs-duration-input-P2" type="number" min="1">
+                        <input class="fcfs-arrival-input fcfs-arrival-input-P2" type="number" min="0">
                     </div>
                 </div>
                 <div class="randomize-div">
-                    <button class="random-data-btn">
+                    <button class="random-data-btn random-data-btn-fcfs">
                         <img src="refresh.png" alt="refresh">
                     </button>
                     <p>RANDOM DATA</p>
-                    <button class="clear-btn">CLEAR</button>
+                    <button class="clear-btn clear-btn-fcfs">CLEAR</button>
                 </div>
                 <div class="compute-div">
-                    <button class="compute-btn">COMPUTE</button>
+                    <button class="compute-btn compute-btn-fcfs">COMPUTE</button>
                 </div>
             </div>
             <div class="section right-section">
@@ -65,17 +66,86 @@
                     <h3 class="result-title">Average waiting time</h3>
                 </div>
                 <div class="result">
-                    <p class="waiting-time-result">...</p>
+                    <p class="fcfs-waiting-time-result">...</p>
                 </div>
                 <div class="result-title-div">
                     <h3 class="result-title">Average turn around time</h3>
                 </div>
                 <div class="result">
-                    <p class="turn-around-result">...</p>
+                    <p class="fcfs-turn-around-result">...</p>
                 </div>
                 <div class="compare-div">
-                    <label class="container">COMPARE
-                        <input class="compare-checkbox" type="checkbox" checked="checked">
+                    <label class="container container-fcfs">COMPARE
+                        <input class="compare-checkbox compare-checkbox-fcfs" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title split"></div>
+    <div class="title alg-title-rr">
+        <h2>ROUND ROBIN</h2>
+    </div>
+    <div class="window window-rr">
+        <div class="content-window content-window-rr">
+            <div class="section left-section">
+                <div class="range-div">
+                    <p>number of processes</p>
+                    <div>
+                        <input class="process-count-range process-count-range-rr" type="range" min="2" max="20"
+                            value="2">
+                        <p class="process-count-output process-count-output-rr"></p>
+                    </div>
+                </div>
+                <div class="inputs-titles-div">
+                    <p>process</p>
+                    <p>duration</p>
+                    <p>arrival time</p>
+                </div>
+                <div class="inputs-div inputs-div-rr">
+                    <div class="input-row input-row-rr">
+                        <p>P1</p>
+                        <input class="rr-duration-input rr-duration-input-P1" type="number" min="1">
+                        <input class="rr-arrival-input rr-arrival-input-P1" type="number" min="0">
+                    </div>
+                    <div class="input-row input-row-rr">
+                        <p>P2</p>
+                        <input class="rr-duration-input rr-duration-input-P2" type="number" min="1">
+                        <input class="rr-arrival-input rr-arrival-input-P2" type="number" min="0">
+                    </div>
+                </div>
+                <div class="randomize-div">
+                    <div class="quantum-div">
+                        <p>quantum</p>
+                        <input class="quantum-input" type="number" value="1" min="1" max="10">
+                    </div>
+                    <button class="random-data-btn random-data-btn-rr">
+                        <img src="refresh.png" alt="refresh">
+                    </button>
+                    <p>RANDOM DATA</p>
+                    <button class="clear-btn clear-btn-rr">CLEAR</button>
+                </div>
+                <div class="compute-div">
+                    <button class="compute-btn compute-btn-rr">COMPUTE</button>
+                </div>
+            </div>
+            <div class="section right-section">
+                <div class="result-title-div">
+                    <h3 class="result-title">Average waiting time</h3>
+                </div>
+                <div class="result">
+                    <p class="rr-waiting-time-result">...</p>
+                </div>
+                <div class="result-title-div">
+                    <h3 class="result-title">Average turn around time</h3>
+                </div>
+                <div class="result">
+                    <p class="rr-turn-around-result">...</p>
+                </div>
+                <div class="compare-div">
+                    <label class="container container-rr">COMPARE
+                        <input class="compare-checkbox compare-checkbox-rr" type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                     </label>
                 </div>
@@ -86,6 +156,8 @@
 
     <script src="App.js" defer></script>
     <script type="module" src="algorithm/FCFS.js"></script>
+    <script type="module" src="algorithm/RoundRobin.js"></script>
+
 </body>
 
 </html>

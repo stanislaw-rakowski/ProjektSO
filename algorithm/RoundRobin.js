@@ -1,12 +1,14 @@
-const computeBtn = document.querySelector('.compute-btn-fcfs');
-const processCountSlider = document.querySelector('.process-count-range-fcfs');
-const randomizeBtn = document.querySelector('.random-data-btn-fcfs');
-const clearInputsBtn = document.querySelector('.clear-btn-fcfs');
+const computeBtn = document.querySelector('.compute-btn-rr');
+const processCountSlider = document.querySelector('.process-count-range-rr');
+const randomizeBtn = document.querySelector('.random-data-btn-rr');
+const clearInputsBtn = document.querySelector('.clear-btn-rr');
+const quantumInput = document.querySelector('.quantum-input');
 
 
 const computeHandler = () => {
     console.log('compute')
     console.log(processCountSlider.value);
+    console.log('quant', quantumInput.value);
 
     const durationTimesArray = [];
     const arrivalTimesArray = [];
@@ -15,8 +17,8 @@ const computeHandler = () => {
     let arrivalTime;
 
     for(let i = 1; i <= processCountSlider.value; i++) {
-        durationTime = parseInt(document.querySelector(`.fcfs-duration-input-P${i}`).value, 10)
-        arrivalTime = parseInt(document.querySelector(`.fcfs-arrival-input-P${i}`).value, 10)
+        durationTime = parseInt(document.querySelector(`.rr-duration-input-P${i}`).value, 10)
+        arrivalTime = parseInt(document.querySelector(`.rr-arrival-input-P${i}`).value, 10)
         
         if(isNaN(durationTime) || isNaN(arrivalTime)) {
             window.alert('All inputs must be filled!');
@@ -32,8 +34,8 @@ const computeHandler = () => {
 
     const [averageWaitingTime, averageTurnAroundTime] = calculateFCFS(durationTimesArray, arrivalTimesArray);
 
-    document.querySelector('.fcfs-waiting-time-result').textContent = averageWaitingTime;
-    document.querySelector('.fcfs-turn-around-result').textContent = averageTurnAroundTime;
+    document.querySelector('.rr-waiting-time-result').textContent = averageWaitingTime;
+    document.querySelector('.rr-turn-around-result').textContent = averageTurnAroundTime;
 }
 
 const calculateFCFS = (durationTimes, arrivalTimes) => {
@@ -94,8 +96,8 @@ randomizeBtn.addEventListener('click', () => {
     console.log('randomize');
 
     for(let i = 1; i <= processCountSlider.value; i++) {
-        document.querySelector(`.fcfs-duration-input-P${i}`).value = getRandomNumber();
-        document.querySelector(`.fcfs-arrival-input-P${i}`).value = getRandomNumber();
+        document.querySelector(`.rr-duration-input-P${i}`).value = getRandomNumber();
+        document.querySelector(`.rr-arrival-input-P${i}`).value = getRandomNumber();
     }
 });
 
@@ -103,10 +105,10 @@ clearInputsBtn.addEventListener('click', () => {
     console.log('clear');
 
     for(let i = 1; i <= processCountSlider.value; i++) {
-        document.querySelector(`.fcfs-duration-input-P${i}`).value = null;
-        document.querySelector(`.fcfs-arrival-input-P${i}`).value = null;
+        document.querySelector(`.rr-duration-input-P${i}`).value = null;
+        document.querySelector(`.rr-arrival-input-P${i}`).value = null;
     }
 
-    document.querySelector('.fcfs-waiting-time-result').textContent = '...';
-    document.querySelector('.fcfs-turn-around-result').textContent = '...';
+    document.querySelector('.rr-waiting-time-result').textContent = '...';
+    document.querySelector('.rr-turn-around-result').textContent = '...';
 });

@@ -1,30 +1,30 @@
-const processCountSlider = document.querySelector('.process-count-range');
-const countOutput = document.querySelector('.process-count-output');
-const compareCheckbox = document.querySelector('.compare-checkbox');
-const inputsDiv = document.querySelector('.inputs-div');
+const processCountSliderFCFS = document.querySelector('.process-count-range-fcfs');
+const countOutputFCFS = document.querySelector('.process-count-output-fcfs');
+const compareCheckboxFCFS = document.querySelector('.compare-checkbox-fcfs');
+const inputsDivFCFS = document.querySelector('.inputs-div-fcfs');
 
-countOutput.textContent = processCountSlider.value;
+countOutputFCFS.textContent = processCountSliderFCFS.value;
 
-processCountSlider.oninput = function() {
-    countOutput.textContent = this.value;
+processCountSliderFCFS.oninput = function() {
+    countOutputFCFS.textContent = this.value;
 
-    inputsDiv.innerHTML = '';
+    inputsDivFCFS.innerHTML = '';
     let el;
 
     for(let i = 1; i <= this.value; i++) {
       el = `
-      <div class="input-row">
+      <div class="input-row input-row-fcfs">
         <p>P${i}</p>
-        <input class="duration-input duration-input-P${i}" type="number" min="1">
-        <input class="arrival-input arrival-input-P${i}" type="number" min="0">
+        <input class="fcfs-duration-input fcfs-duration-input-P${i}" type="number" min="1">
+        <input class="fcfs-arrival-input fcfs-arrival-input-P${i}" type="number" min="0">
       </div>`;
 
-      inputsDiv.innerHTML += el;
+      inputsDivFCFS.innerHTML += el;
     }
 }
 
 
-compareCheckbox.addEventListener('change', function() {
+compareCheckboxFCFS.addEventListener('change', function() {
     if (this.checked) {
       console.log("Checkbox is checked..");
     } else {
@@ -32,3 +32,36 @@ compareCheckbox.addEventListener('change', function() {
     }
 });
 
+const processCountSliderRR = document.querySelector('.process-count-range-rr');
+const countOutputRR = document.querySelector('.process-count-output-rr');
+const compareCheckboxRR = document.querySelector('.compare-checkbox-rr');
+const inputsDivRR = document.querySelector('.inputs-div-rr');
+
+countOutputRR.textContent = processCountSliderRR.value;
+
+processCountSliderRR.oninput = function() {
+    countOutputRR.textContent = this.value;
+
+    inputsDivRR.innerHTML = '';
+    let el;
+
+    for(let i = 1; i <= this.value; i++) {
+      el = `
+      <div class="input-row input-row-rr">
+        <p>P${i}</p>
+        <input class="rr-duration-input rr-duration-input-P${i}" type="number" min="1">
+        <input class="rr-arrival-input rr-arrival-input-P${i}" type="number" min="0">
+      </div>`;
+
+      inputsDivRR.innerHTML += el;
+    }
+}
+
+
+compareCheckboxRR.addEventListener('change', function() {
+    if (this.checked) {
+      console.log("Checkbox is checked..");
+    } else {
+      console.log("Checkbox is not checked..");
+    }
+});
