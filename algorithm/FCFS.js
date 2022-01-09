@@ -30,7 +30,9 @@ const computeHandler = () => {
     console.log(durationTimesArray);
     console.log(arrivalTimesArray);
 
-    const [averageWaitingTime, averageTurnAroundTime] = calculateFCFS(durationTimesArray, arrivalTimesArray);
+    const [averageWaitingTime, averageTurnAroundTime, processesData] = calculateFCFS(durationTimesArray, arrivalTimesArray);
+
+    console.log(processesData);
 
     document.querySelector('.fcfs-waiting-time-result').textContent = averageWaitingTime;
     document.querySelector('.fcfs-turn-around-result').textContent = averageTurnAroundTime;
@@ -38,63 +40,70 @@ const computeHandler = () => {
 
 const calculateFCFS = (durationTimes, arrivalTimes) => {
 
-    function findWaitingTime(processesCount, durations, waitingTimes)
-    {
-        waitingTimes[0] = 0;
-   
-        for (let i = 1; i < processesCount; i++) {
-            waitingTimes[i] = durations[i - 1] + waitingTimes[i - 1];
+    const processesCount = arrivalTimes.length;
+    const waitingTimes = new Array(processesCount);
+    const turnAroundTimes = new Array(processesCount);
+
+    const serviceTime = new Array(processesCount);
+    serviceTime[0] = arrivalTimes[0];
+    waitingTimes[0] = 0;
+  
+    for (let i = 1; i < processesCount; i++) {
+        let wastedTime = 0;
+
+        serviceTime[i] = serviceTime[i - 1] + durationTimes[i - 1];
+        waitingTimes[i] = serviceTime[i] - arrivalTimes[i];
+ 
+        if (waitingTimes[i] < 0) {
+            wastedTime = Math.abs(waitingTimes[i]);
+            waitingTimes[i] = 0;
         }
+
+        serviceTime[i] = serviceTime[i] + wastedTime;
     }
-     
-    function findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes)
-    {
-        for (let i = 0; i < processesCount; i++) {
-            turnAroundTimes[i] = durations[i] + waitingTimes[i];
-        }
+
+    for (let i = 0; i < processesCount; i++) {
+        turnAroundTimes[i] = durationTimes[i] + waitingTimes[i];
     }
-     
-    function findavgTime(arrivals, processesCount, durations)
-    {
-        const waitingTimes = new Array(processesCount);
-        const turnAroundTimes = new Array(processesCount);
+
+    let totalWaitingTime = 0;
+    let totalTurnAroundTime = 0;
+    let completionTime = 0;
+    const processesData = [];
+    
+    for (let i = 0 ; i < processesCount; i++) {
+        totalWaitingTime += waitingTimes[i];
+        totalTurnAroundTime += turnAroundTimes[i];
         
-        let totalWaitingTime = 0;
-        let totalTurnAroundTime = 0;
-   
-        findWaitingTime(processesCount, durations, waitingTimes);
-   
-        findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes);
-   
-        for (let i = 0; i < processesCount; i++) {
-            totalWaitingTime += waitingTimes[i];
-            totalTurnAroundTime += turnAroundTimes[i];
-            console.log(i+1, durations[i], waitingTimes[i], turnAroundTimes[i]);
-        }
-
-        let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
-        let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
-        console.log(averageWaitingTime);
-        console.log(averageTurnAroundTime);
-
-        return [averageWaitingTime, averageTurnAroundTime];
+        completionTime = turnAroundTimes[i] + arrivalTimes[i];
+        
+        processesData.push({
+            number: i + 1,
+            duration: durationTimes[i],
+            arrivalTime: arrivalTimes[i],
+            waitingTime: waitingTimes[i],
+            turnAroundTime: turnAroundTimes[i],
+            timeWhenCompleted: completionTime
+        });
     }
+    
+    let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
+    let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
 
-    const result = findavgTime(arrivalTimes, arrivalTimes.length, durationTimes);
-    return result;
+    return [averageWaitingTime, averageTurnAroundTime, processesData];
 }
 
 computeBtn.addEventListener('click', computeHandler);
 
 const getRandomNumber = () => {
-    return Math.floor(Math.random() * 20) + 1;
+    return Math.floor(Math.random() * 20);
 }
 
 randomizeBtn.addEventListener('click', () => {
     console.log('randomize');
 
     for(let i = 1; i <= processCountSlider.value; i++) {
-        document.querySelector(`.fcfs-duration-input-P${i}`).value = getRandomNumber();
+        document.querySelector(`.fcfs-duration-input-P${i}`).value = getRandomNumber() + 1;
         document.querySelector(`.fcfs-arrival-input-P${i}`).value = getRandomNumber();
     }
 });

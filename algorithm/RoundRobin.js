@@ -8,10 +8,11 @@ const quantumInput = document.querySelector('.quantum-input');
 const computeHandler = () => {
     console.log('compute')
     console.log(processCountSlider.value);
-    console.log('quant', quantumInput.value);
+    console.log('quant', typeof quantumInput.value);
 
     const durationTimesArray = [];
     const arrivalTimesArray = [];
+    const quantum = quantumInput.value;
 
     let durationTime;
     let arrivalTime;
@@ -32,48 +33,76 @@ const computeHandler = () => {
     console.log(durationTimesArray);
     console.log(arrivalTimesArray);
 
-    const [averageWaitingTime, averageTurnAroundTime] = calculateFCFS(durationTimesArray, arrivalTimesArray);
+    const [averageWaitingTime, averageTurnAroundTime] = calculateRoundRobin(durationTimesArray, arrivalTimesArray, quantum);
 
     document.querySelector('.rr-waiting-time-result').textContent = averageWaitingTime;
     document.querySelector('.rr-turn-around-result').textContent = averageTurnAroundTime;
 }
 
-const calculateFCFS = (durationTimes, arrivalTimes) => {
+const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 
-    function findWaitingTime(processesCount, durations, waitingTimes)
-    {
-        waitingTimes[0] = 0;
-   
-        for (let i = 1; i < processesCount; i++) {
-            waitingTimes[i] = durations[i - 1] + waitingTimes[i - 1];
+    const findWaitingTime = (processesCount, durations, waitingTimes, quantum) => {
+        
+        let remainingDurations = new Array(processesCount).fill(0);
+        
+        for (let i = 0; i < processesCount; i++) {
+            remainingDurations[i] = durations[i];
+        }
+ 
+        let currentTime = 0;
+
+        while (1) {
+            let done = true;
+
+            console.log('while iteration')
+            console.log(...waitingTimes)
+ 
+            for (let i = 0; i < processesCount; i++) {
+                console.log(i, ' loop iteration')
+                if (remainingDurations[i] > 0) {
+                    done = false;
+ 
+                    if (remainingDurations[i] > quantum) {
+                        currentTime += quantum;
+                        remainingDurations[i] -= quantum;
+                    }
+                    else {
+                        currentTime += remainingDurations[i];
+                        waitingTimes[i] = currentTime - durations[i];
+                        remainingDurations[i] = 0;
+                    }
+                }
+            }
+ 
+            if (done)
+                break;
         }
     }
-     
-    function findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes)
-    {
+ 
+    const findTurnAroundTime = (processesCount, durations, waitingTimes, turnAroundTimes) => {
+        
         for (let i = 0; i < processesCount; i++) {
             turnAroundTimes[i] = durations[i] + waitingTimes[i];
         }
     }
-     
-    function findavgTime(arrivals, processesCount, durations)
-    {
-        const waitingTimes = new Array(processesCount);
-        const turnAroundTimes = new Array(processesCount);
-        
-        let totalWaitingTime = 0;
-        let totalTurnAroundTime = 0;
-   
-        findWaitingTime(processesCount, durations, waitingTimes);
-   
-        findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes);
-   
-        for (let i = 0; i < processesCount; i++) {
-            totalWaitingTime += waitingTimes[i];
-            totalTurnAroundTime += turnAroundTimes[i];
-            console.log(i+1, durations[i], waitingTimes[i], turnAroundTimes[i]);
-        }
 
+    const findAvgTime = (arrivals, processesCount, durations, quantum) => {
+        let waitingTimes = new Array(processesCount).fill(0)
+        let turnAroundTimes = new Array(processesCount).fill(0);
+        let totalWaitingTime = 0
+        let totalTurnAroundTime = 0;
+ 
+        findWaitingTime(processesCount, durations, waitingTimes, quantum);
+ 
+        findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes);
+ 
+        for (let i = 0; i < processesCount; i++) {
+            totalWaitingTime = totalWaitingTime + waitingTimes[i];
+            totalTurnAroundTime = totalTurnAroundTime + turnAroundTimes[i];
+ 
+            console.log(`${i + 1}${durations[i]}${waitingTimes[i]}${turnAroundTimes[i]}`);
+        }
+ 
         let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
         let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
         console.log(averageWaitingTime);
@@ -82,21 +111,21 @@ const calculateFCFS = (durationTimes, arrivalTimes) => {
         return [averageWaitingTime, averageTurnAroundTime];
     }
 
-    const result = findavgTime(arrivalTimes, arrivalTimes.length, durationTimes);
+    const result = findAvgTime(arrivalTimes, arrivalTimes.length, durationTimes, quantum);
     return result;
 }
 
 computeBtn.addEventListener('click', computeHandler);
 
 const getRandomNumber = () => {
-    return Math.floor(Math.random() * 20) + 1;
+    return Math.floor(Math.random() * 20);
 }
 
 randomizeBtn.addEventListener('click', () => {
     console.log('randomize');
 
     for(let i = 1; i <= processCountSlider.value; i++) {
-        document.querySelector(`.rr-duration-input-P${i}`).value = getRandomNumber();
+        document.querySelector(`.rr-duration-input-P${i}`).value = getRandomNumber() + 1;
         document.querySelector(`.rr-arrival-input-P${i}`).value = getRandomNumber();
     }
 });
