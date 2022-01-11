@@ -41,78 +41,7 @@ const computeHandler = () => {
 
 const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 
-    const findWaitingTime = (processesCount, durations, waitingTimes, quantum) => {
-        
-        let remainingDurations = new Array(processesCount).fill(0);
-        
-        for (let i = 0; i < processesCount; i++) {
-            remainingDurations[i] = durations[i];
-        }
- 
-        let currentTime = 0;
-
-        while (1) {
-            let done = true;
-
-            console.log('while iteration')
-            console.log(...waitingTimes)
- 
-            for (let i = 0; i < processesCount; i++) {
-                console.log(i, ' loop iteration')
-                if (remainingDurations[i] > 0) {
-                    done = false;
- 
-                    if (remainingDurations[i] > quantum) {
-                        currentTime += quantum;
-                        remainingDurations[i] -= quantum;
-                    }
-                    else {
-                        currentTime += remainingDurations[i];
-                        waitingTimes[i] = currentTime - durations[i];
-                        remainingDurations[i] = 0;
-                    }
-                }
-            }
- 
-            if (done)
-                break;
-        }
-    }
- 
-    const findTurnAroundTime = (processesCount, durations, waitingTimes, turnAroundTimes) => {
-        
-        for (let i = 0; i < processesCount; i++) {
-            turnAroundTimes[i] = durations[i] + waitingTimes[i];
-        }
-    }
-
-    const findAvgTime = (arrivals, processesCount, durations, quantum) => {
-        let waitingTimes = new Array(processesCount).fill(0)
-        let turnAroundTimes = new Array(processesCount).fill(0);
-        let totalWaitingTime = 0
-        let totalTurnAroundTime = 0;
- 
-        findWaitingTime(processesCount, durations, waitingTimes, quantum);
- 
-        findTurnAroundTime(processesCount, durations, waitingTimes, turnAroundTimes);
- 
-        for (let i = 0; i < processesCount; i++) {
-            totalWaitingTime = totalWaitingTime + waitingTimes[i];
-            totalTurnAroundTime = totalTurnAroundTime + turnAroundTimes[i];
- 
-            console.log(`${i + 1}${durations[i]}${waitingTimes[i]}${turnAroundTimes[i]}`);
-        }
- 
-        let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
-        let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
-        console.log(averageWaitingTime);
-        console.log(averageTurnAroundTime);
-
-        return [averageWaitingTime, averageTurnAroundTime];
-    }
-
-    const result = findAvgTime(arrivalTimes, arrivalTimes.length, durationTimes, quantum);
-    return result;
+    
 }
 
 computeBtn.addEventListener('click', computeHandler);

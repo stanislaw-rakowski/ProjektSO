@@ -18,6 +18,7 @@
 
     <div class="title logo-title">
         <h1 class="logo">Projekt SO</h1>
+        <button class="test-btn">TEST</button>
     </div>
     <div class="title alg-title-fcfs">
         <h2>FCFS</h2>
@@ -152,11 +153,110 @@
             </div>
         </div>
     </div>
+    <div class="title split"></div>
+    <div class="title alg-title-fifo">
+        <h2>FIFO</h2>
+    </div>
+    <div class="window window-fifo">
+        <div class="content-window content-window-fifo">
+            <div class="section left-section">
+                <div class="range-div range-div-fifo">
+                    <p>capacity</p>
+                    <div>
+                        <input class="process-count-range process-count-range-fifo" type="range" min="1" max="20"
+                            value="2">
+                        <p class="process-count-output process-count-output-fifo"></p>
+                    </div>
+                </div>
+                <div class="pages-input-div fifo-pages-input-div">
+                    <h3>pages</h3>
+                    <input class="pages-input fifo-pages-input" type="text" placeholder="np. 7 0 1 2 0 3">
+                    <p>enter pages separated by space</p>
+                </div>
+                <div class="randomize-div">
+                    <button class="random-data-btn random-data-btn-fifo">
+                        <img src="refresh.png" alt="refresh">
+                    </button>
+                    <p>RANDOM DATA</p>
+                    <button class="clear-btn clear-btn-fifo">CLEAR</button>
+                </div>
+                <div class="compute-div">
+                    <button class="compute-btn compute-btn-fifo">COMPUTE</button>
+                </div>
+            </div>
+            <div class="section right-section">
+                <div class="result-title-div">
+                    <h3 class="result-title">Total page faults</h3>
+                </div>
+                <div class="result">
+                    <p class="fifo-page-faults-result">...</p>
+                </div>
+                <div class="compare-div">
+                    <label class="container container-fifo">COMPARE
+                        <input class="compare-checkbox compare-checkbox-fifo" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title split"></div>
+    <div class="title alg-title-lru">
+        <h2>LRU</h2>
+    </div>
+    <div class="window window-lru">
+        <div class="content-window content-window-lru">
+            <div class="section left-section">
+                <div class="range-div range-div-lru">
+                    <p>capacity</p>
+                    <div>
+                        <input class="process-count-range process-count-range-lru" type="range" min="1" max="20"
+                            value="2">
+                        <p class="process-count-output process-count-output-lru"></p>
+                    </div>
+                </div>
+                <div class="pages-input-div lru-pages-input-div">
+                    <h3>pages</h3>
+                    <input class="pages-input lru-pages-input" type="text" placeholder="np. 7 0 1 2 0 3">
+                    <p>enter pages separated by space</p>
+                </div>
+                <div class="randomize-div">
+                    <button class="random-data-btn random-data-btn-lru">
+                        <img src="refresh.png" alt="refresh">
+                    </button>
+                    <p>RANDOM DATA</p>
+                    <button class="clear-btn clear-btn-lru">CLEAR</button>
+                </div>
+                <div class="compute-div">
+                    <button class="compute-btn compute-btn-lru">COMPUTE</button>
+                </div>
+            </div>
+            <div class="section right-section">
+                <div class="result-title-div">
+                    <h3 class="result-title">Total page faults</h3>
+                </div>
+                <div class="result">
+                    <p class="lru-page-faults-result">...</p>
+                </div>
+                <div class="compare-div">
+                    <label class="container container-lru">COMPARE
+                        <input class="compare-checkbox compare-checkbox-lru" type="checkbox" checked="checked">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title split show-modal-div">
+        <button class="show-modal-btn">SHOW COMPARISON</button>
+    </div>
 
 
     <script src="App.js" defer></script>
     <script type="module" src="algorithm/FCFS.js"></script>
     <script type="module" src="algorithm/RoundRobin.js"></script>
+    <script type="module" src="algorithm/FIFO.js"></script>
+    <script type="module" src="algorithm/LRU.js"></script>
 
 </body>
 

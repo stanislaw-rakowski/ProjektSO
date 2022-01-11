@@ -57,7 +57,6 @@ processCountSliderRR.oninput = function() {
     }
 }
 
-
 compareCheckboxRR.addEventListener('change', function() {
     if (this.checked) {
       console.log("Checkbox is checked..");
