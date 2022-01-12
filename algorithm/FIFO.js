@@ -26,16 +26,49 @@ const computeHandler = () => {
     
     console.log(pagesArray);
         
-    // const [averageWaitingTime, averageTurnAroundTime] = calculateRoundRobin(durationTimesArray, arrivalTimesArray, quantum);
+    const pageFaults = calculateFIFO(pagesArray, capacitySlider.value);
 
-    // document.querySelector('.rr-waiting-time-result').textContent = averageWaitingTime;
-    // document.querySelector('.rr-turn-around-result').textContent = averageTurnAroundTime;
+    document.querySelector('.fifo-page-faults-result').textContent = pageFaults;
 }
 
-// const calculateFIFO = (pages, capacity) => {
+const calculateFIFO = (pages, capacity) => {
 
+    const pagesCount = pages.length;
+
+    const set = [];
+    const queue = [];
+
+    let pageFaults = 0;
+
+    for(let i = 0; i < pagesCount; i++) {
+
+        if(set.length < capacity) {
+            
+            if(!set.includes(pages[i])) {
+
+                set.push(pages[i])
+                pageFaults++;
+                queue.push(pages[pagesCount - i]);
+            }
+
+        }
+        else {
+
+            if(!set.includes(pages[i])) {
+
+                let val = queue[0];
+                queue.shift();
+                set.filter(x => x !== val);
+                set.push(pages[i]);
+                queue.push(pages[i]);
+                pageFaults++;
+                
+            }
+        }
+    }
     
-// }
+    return pageFaults;
+}
 
 computeBtn.addEventListener('click', computeHandler);
 

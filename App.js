@@ -64,3 +64,35 @@ compareCheckboxRR.addEventListener('change', function() {
       console.log("Checkbox is not checked..");
     }
 });
+
+
+const comparisonModal = document.querySelector('.comparison-modal');
+const comparisonBtn = document.querySelector('.show-modal-btn');
+const closeComparisonModalSpan = document.getElementsByClassName('comparison-close')[0];
+
+comparisonBtn.onclick = function() {
+  comparisonModal.style.display = "block";
+}
+closeComparisonModalSpan.onclick = function() {
+  comparisonModal.style.display = "none";
+}
+
+const testModal = document.querySelector('.test-modal');
+const testBtn = document.querySelector('.test-btn');
+const closeTestModalSpan = document.getElementsByClassName('test-close')[0];
+
+testBtn.onclick = function() {
+  testModal.style.display = "block";
+}
+closeTestModalSpan.onclick = function() {
+  testModal.style.display = "none";
+}
+window.onclick = function(event) {
+  if (event.target == testModal) {
+    testModal.style.display = "none";
+  }
+
+  if (event.target == comparisonModal) {
+    comparisonModal.style.display = "none";
+  }
+}
