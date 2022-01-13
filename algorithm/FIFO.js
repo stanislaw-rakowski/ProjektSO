@@ -35,34 +35,31 @@ const calculateFIFO = (pages, capacity) => {
 
     const pagesCount = pages.length;
 
-    const set = [];
+    const set = new Set();
     const queue = [];
 
     let pageFaults = 0;
 
     for(let i = 0; i < pagesCount; i++) {
 
-        if(set.length < capacity) {
-            
-            if(!set.includes(pages[i])) {
+        if(set.size < capacity) {
 
-                set.push(pages[i])
+            if(!set.has(pages[i])) {
+                set.add(pages[i])
                 pageFaults++;
-                queue.push(pages[pagesCount - i]);
+                queue.push(pages[i]);
             }
 
         }
         else {
 
-            if(!set.includes(pages[i])) {
-
+            if(!set.has(pages[i])) {
                 let val = queue[0];
                 queue.shift();
-                set.filter(x => x !== val);
-                set.push(pages[i]);
+                set.delete(val);
+                set.add(pages[i]);
                 queue.push(pages[i]);
                 pageFaults++;
-                
             }
         }
     }

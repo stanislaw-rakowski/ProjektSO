@@ -26,16 +26,60 @@ const computeHandler = () => {
     
     console.log(pagesArray);
         
-    // const [averageWaitingTime, averageTurnAroundTime] = calculateRoundRobin(durationTimesArray, arrivalTimesArray, quantum);
+    const pageFaults = calculateLRU(pagesArray, capacitySlider.value);
 
-    // document.querySelector('.rr-waiting-time-result').textContent = averageWaitingTime;
-    // document.querySelector('.rr-turn-around-result').textContent = averageTurnAroundTime;
+    document.querySelector('.lru-page-faults-result').textContent = pageFaults;
 }
 
-// const calculateFIFO = (pages, capacity) => {
-
+const calculateLRU = (pages, capacity) => {
     
-// }
+    const pagesCount = pages.length;
+
+    let set = new Set();
+    let indexes = new Map();
+    
+    let pageFaults = 0;
+    for (let i = 0; i < pagesCount; i++) {
+        
+        if (set.size < capacity) {
+            
+            if (!set.has(pages[i])) {
+                set.add(pages[i]);
+                pageFaults++;
+            }
+    
+            indexes.set(pages[i], i);
+        }
+    
+        else {
+    
+            if (!set.has(pages[i])) {
+            
+                let lru = Number.MAX_VALUE;
+                let val = Number.MIN_VALUE;
+                    
+                for(let itr of set.values()) {
+                    let temp = itr;
+
+                    if (indexes[temp] < lru) {
+                        lru = indexes[temp];
+                        val = temp;
+                    }
+                }
+                
+                set.delete(val);
+                indexes.delete(val);
+                set.add(pages[i]);
+    
+                pageFaults++;
+            }
+    
+            indexes.set(pages[i], i);
+        }
+    }
+    
+    return pageFaults;
+}
 
 computeBtn.addEventListener('click', computeHandler);
 

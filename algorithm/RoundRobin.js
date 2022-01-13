@@ -41,211 +41,115 @@ const computeHandler = () => {
 
 const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 
-    const processes = [];
-    const processesCount = arrivalTimes.length;
+    const findElement = (queue, i) => {
+        while(!queue.length) {
+            if(queue[0] == i) {
+                return true;
+            }
+            queue.shift()
+        }
+        return false;
+    }
 
-    for(let i = 0; i < processesCount; i++) {
+    console.log('arr', arrivalTimes)
+    const processes = [];
+    const queue = [];
+    const processesCount = arrivalTimes.length;
+    let time;
+
+    for(let i = 0; i < processesCount * 2; i++) {
         processes.push({
             id: i + 1,
-            arrivalTime: arrivalTimes[i],
-            durationTime: durationTimes[i],
-            remainingTime: durationTimes[i],
+            arrivalTime: arrivalTimes[i] || 1,
+            durationTime: durationTimes[i] || 1,
+            tempDurationTime: durationTimes[i] || 1,
             waitingTime: 0,
+            turnAroundTime: 0,
             completionTime: 0
         })
     }
-
+    
+    console.log(processes)
     processes.sort((a, b) => {
         return a.arrivalTime - b.arrivalTime;
     })
     console.log('sorted processes', processes);
 
-    const readyQueue = [];
+    queue.push(0);
 
-    let toBeInserted = 0;
-    let timeElapsed = 0;
-    let processesLeft = processesCount;
     let i;
+    let j;
+    let procomp = 0;
+    time = processes[0].arrivalTime;
 
-    while(processesLeft) {
+    while(procomp < processesCount) {
+        j = queue[0];
+        if(processes[j].durationTime < quantum) {
+            processes[j].completionTime = time + processes[j].durationTime;
+            time = time + processes[j].durationTime;
+            processes[j].durationTime = 0;
+        }
+        else {
+            processes[j].completionTime = time + quantum;
+            processes[j].durationTime -= quantum;
+            time = time + quantum;
+        }
 
-        for(i = toBeInserted; (i < processesCount) && (processes[i].arrivalTime <= timeElapsed); i++) {
-            readyQueue.push(processes[i]);
+        i = queue[-1] + 1;
+        //console.log(queue)
+        //console.log(processes[i].arrivalTime)
+        
+        while(processes[i].arrivalTime <= time &&i < processesCount && processes[i].durationTime != 0) {
+
+            if(!findElement(queue, i)) {
+                queue.push(i);
+            }
+            i++;
+        }
+
+        if(processes[j].durationTime != 0) {
+            queue.push(j);
+        }
+        queue.shift();
+        procomp = 0;
+
+        for(let i = 0; i < processesCount; i++) {
+            if(processes[i].durationTime == 0) {
+                procomp++
+            }
         }
     }
 
+    for(let i = 0; i < processesCount; i++) {
+        processes[i].turnAroundTime = processes[i].completionTime - processes[i].arrivalTime;
+        processes[i].waitingTime = processes[i].turnAroundTime - processes[i].tempDurationTime;
+    }
 
-
-
-
-    // const queueUpdation = (queue, timer, arrival, n, maxProccessIndex) => {
-    //     let zeroIndex;
-
-    //     for(let i = 0; i < n; i++) {
-    //         if(queue[i] === 0) {
-    //             zeroIndex = i;
-    //             break;
-    //         }
-    //     }
-
-    //     queue[zeroIndex] = maxProccessIndex + 1;
-    // }
-
-    // const queueMaintainence = (queue, n) => {
-    //     for(let i = 0; (i < n - 1) && (queue[i + 1] !== 0); i++) {
-    //         let temp = queue[i];
-    //         queue[i] = queue[i + 1];
-    //         queue[i + 1] = temp;
-    //     }
-    // }
-
-    // const checkNewArrival = (timer, arrival, n, maxProccessIndex, queue) => {
-    //     if(timer <= arrival[n - 1]) {
-    //         let newArrival = false;
-    //         for(let j = maxProccessIndex + 1; j < n; j++) {
-    //             if(arrival[j] <= timer) {
-    //                 if(maxProccessIndex < j) {
-    //                     maxProccessIndex = j;
-    //                     newArrival = true;
-    //                 }
-    //             }
-    //         }
-
-    //         if(newArrival) {
-    //             queueUpdation(queue, timer, arrival, n, maxProccessIndex);
-    //         }
-    //     }
-    // }
-
-    // const processesCount = unsortedArrivalTimes.length;
-    // const arrivalTimes = [];
-    // const durationTimes = [];
-
-    // console.log(unsortedDurationTimes)
-    // console.log(unsortedArrivalTimes)
-
-
-    // let list = [];
-    // for(let i = 0; i < processesCount; i++) {
-    //     list.push({
-    //         arr: unsortedArrivalTimes[i],
-    //         dur: unsortedDurationTimes[i]
-    //     })
-    // }
-
-    // list.sort((a, b) => {
-    //     return a.arr - b.arr;
-    // })
-
-    // for(let i = 0; i < processesCount; i++) {
-    //     arrivalTimes[i] = list[i].arr;
-    //     durationTimes[i] = list[i].dur;
-    // }
-
-    // console.log(durationTimes)
-    // console.log(arrivalTimes)
-
-
-    // let timer = 0;
-    // let maxProccessIndex = 0;
-
-    // const tempDurationTimes = [...durationTimes];
-
-    // const queue = new Array(processesCount).fill(0);
-    // const complete = new Array(processesCount).fill(false);
-    // const turn = new Array(processesCount).fill(0);
-    // const wait = new Array(processesCount).fill(0);
-
-
-
-    // while(timer < arrivalTimes[0]) {
-    //     timer++;
-    // }
-    // queue[0] = 1;
-
-    // whileLoop:
-    // while(true) {
-    //     let flag = true;
-    //     for(let i = 0; i < processesCount; i++) {
-    //         if(tempDurationTimes[i] != 0) {
-    //             flag = false;
-    //             break whileLoop;
-    //         }
-    //     }
-    //     if(flag) {
-    //         break whileLoop;
-    //     }
-
-    //     for(let i = 0; (i < processesCount) && (queue[i] !== 0); i++) {
-    //         let ctr = 0;
-    //         while((ctr < quantum) && (tempDurationTimes[queue[0] - 1] > 0)) {
-    //             tempDurationTimes[queue[0] - 1] -= 1;
-    //             timer += 1;
-    //             ctr++;
-
-    //             checkNewArrival(timer, arrivalTimes, processesCount, maxProccessIndex, queue);
-    //         }
-
-    //         if((tempDurationTimes[queue[0] - 1] === 0) && (complete[queue[0] - 1] === false)) {
-    //             turn[queue[0] - 1] = timer;
-    //             complete[queue[0] - 1] = true;
-    //         }
-
-    //         let idle = true;
-    //         if(queue[processesCount - 1] === 0) {
-    //             for(let i = 0; (i < processesCount) && (queue[i] !== 0); i++) {
-    //                 if(complete[queue[i] - 1] === false) {
-    //                     idle = false;
-    //                 }
-    //             }
-    //         }
-    //         else {
-    //             idle = false;
-    //         }
-
-    //         if(idle) {
-    //             timer++;
-    //             checkNewArrival(timer, arrivalTimes, processesCount, maxProccessIndex, queue);
-    //         }
-    //         console.log('while loop')
-    //         queueMaintainence(queue, processesCount);
-    //     }
-    // }
-
-    // for(let i = 0; i < processesCount; i++) {
-    //     turn[i] = turn[i] - arrivalTimes[i];
-    //     wait[i] = turn[i] - durationTimes[i];
-    // }
-
-    // let totalWaitingTime = 0;
-    // let totalTurnAroundTime = 0;
-    // let completionTime = 0;
-    // const processesData = [];
+    let totalWaitingTime = 0;
+    let totalTurnAroundTime = 0;
+    let completionTime;
+    const processesData = [];
     
-    // for (let i = 0 ; i < processesCount; i++) {
-    //     totalWaitingTime += wait[i];
-    //     totalTurnAroundTime += turn[i];
+    for (let i = 0 ; i < processesCount; i++) {
+        totalWaitingTime += processes[i].waitingTime;
+        totalTurnAroundTime += processes[i].turnAroundTime;
         
-    //     completionTime = turn[i] + arrivalTimes[i];
+        completionTime = processes[i].turnAroundTime + processes[i].arrivalTime;
         
-    //     processesData.push({
-    //         number: i + 1,
-    //         duration: durationTimes[i],
-    //         arrivalTime: arrivalTimes[i],
-    //         waitingTime: wait[i],
-    //         turnAroundTime: turn[i],
-    //         timeWhenCompleted: completionTime
-    //     });
-
-    //     console.log(turn);
-    //     console.log(wait);
-    //     console.log(completionTime);
-    // }
+        processesData.push({
+            number: i + 1,
+            duration: processes[i].tempDurationTime,
+            arrivalTime: processes[i].arrivalTime,
+            waitingTime: processes[i].waitingTime,
+            turnAroundTime: processes[i].waitingTime,
+            timeWhenCompleted: processes[i].completionTime
+        });
+    }
     
-    // let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
-    // let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
+    let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
+    let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
 
-    // return [averageWaitingTime, averageTurnAroundTime, processesData];
+    return [averageWaitingTime, averageTurnAroundTime, processesData];
 }
 
 computeBtn.addEventListener('click', computeHandler);

@@ -81,9 +81,6 @@ const testModal = document.querySelector('.test-modal');
 const testBtn = document.querySelector('.test-btn');
 const closeTestModalSpan = document.getElementsByClassName('test-close')[0];
 
-testBtn.onclick = function() {
-  testModal.style.display = "block";
-}
 closeTestModalSpan.onclick = function() {
   testModal.style.display = "none";
 }
@@ -96,3 +93,12 @@ window.onclick = function(event) {
     comparisonModal.style.display = "none";
   }
 }
+
+const testHandler = () => {
+  testModal.style.display = "flex";
+
+}
+
+
+
+testBtn.addEventListener('click', testHandler);

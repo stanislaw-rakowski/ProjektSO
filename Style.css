@@ -487,31 +487,102 @@ body * {
 }
 
 .test-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    width: 100%;
+    height: 100%; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.7); 
 }
   
 .test-modal-content {
     background-color: #696969;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto; 
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+    border: none;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    position: relative;
+}
+
+/* .test-modal * {
+    border: solid 1px black;
+} */
+
+.test-section {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.processes-section {
+    border-right: solid 0.5px white;
+}
+.pages-section {
+    border-left: solid 0.5px white;
+}
+
+.chart-div {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
   
+.test-results-title-div {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 2px white;
+}
+
+.test-results-div {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.test-results-title-div h4 {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+
+.test-results {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .test-close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
 }
   
 .test-close:hover,
