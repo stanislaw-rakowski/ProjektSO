@@ -153,7 +153,8 @@ const testPages = () => {
             suggestedMin: 5 
           }
         }]
-      }
+      },
+      hover: {mode: null}
     }
   });
 
@@ -228,7 +229,8 @@ const testProcesses = () => {
       }]
     },
     options: {
-      legend: {display: false}
+      legend: {display: false},
+      hover: {mode: null}
     }
   });
 
