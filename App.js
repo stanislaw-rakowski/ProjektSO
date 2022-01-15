@@ -98,12 +98,15 @@ const getRandomNumber = (max) => {
   return Math.floor(Math.random() * max);
 }
 
+const relDiff = (a, b) => {
+  return Math.round(Math.abs((a - b) / ((a + b) / 2)) * 10000) / 100;
+}
+
 const testHandler = () => {
   testModal.style.display = "flex";
 
   testProcesses();
   testPages();
-  
 }
 
 const testPages = () => {
@@ -161,6 +164,9 @@ const testPages = () => {
   const resultsList = document.querySelector('.pages-test-results-ul');
   resultsList.innerHTML = '';
 
+  let totalFIFOpageFaults = 0;
+  let totalLRUpageFaults = 0;
+
   for(let i = 0; i < 100; i++) {
     resultsList.innerHTML += `
     <li>
@@ -169,7 +175,20 @@ const testPages = () => {
       <p style="background-color: blue;">${LRUresults[i]}</p>
     </li>
   `;
+
+    totalFIFOpageFaults += FIFOresults[i];
+    totalLRUpageFaults += LRUresults[i];
   }
+
+  const comparison = document.querySelector('.test-comparison-pages');
+
+  console.log('lru', totalLRUpageFaults)
+  console.log('fifo', totalFIFOpageFaults)
+  
+  comparison.textContent = totalLRUpageFaults < totalFIFOpageFaults 
+  ? `FIFO algorithm had on average ${relDiff(totalFIFOpageFaults, totalLRUpageFaults)}% more page faults than LRU.`
+  : `LRU algorithm had on average ${relDiff(totalLRUpageFaults, totalFIFOpageFaults)}% more page faults than FIFO.`;
+  
 } 
 
 const testProcesses = () => {
@@ -237,6 +256,11 @@ const testProcesses = () => {
   const resultsList = document.querySelector('.processes-test-results');
   resultsList.innerHTML = '';
 
+  let FCFStotalWT = 0;
+  let FCFStotalTAT = 0;
+  let RRtotalWT = 0;
+  let RRtotalTAT = 0;
+
   for(let i = 0; i < 100; i++) {
     resultsList.innerHTML += `
     <li>
@@ -247,7 +271,34 @@ const testProcesses = () => {
       <p style="background-color: orange;">${TATtestResultsRR[i]}</p>
     </li>
   `;
+
+    FCFStotalWT += WTtestResultsFCFS[i];
+    FCFStotalTAT += TATtestResultsFCFS[i];
+    RRtotalWT += WTtestResultsRR[i];
+    RRtotalTAT += TATtestResultsRR[i];
   }
+
+  const comparisonWT = document.querySelector('.test-comparison-processes-wt');
+  const comparisonTAT = document.querySelector('.test-comparison-processes-tat');
+
+  const relDiff = (a, b) => {
+    return Math.round(Math.abs((a - b) / ((a + b) / 2)) * 10000) / 100;
+  }
+
+  console.log('rr wt', RRtotalWT)
+  console.log('rr tat', RRtotalTAT)
+  console.log('ff wt', FCFStotalWT)
+  console.log('ff tat', FCFStotalTAT)
+
+  
+  comparisonWT.textContent = RRtotalWT < FCFStotalWT 
+  ? `FCFS algorithm waiting time was on average ${relDiff(FCFStotalWT, RRtotalWT)}% higher than Round Robin's.`
+  : `Round Robin algorithm waiting time was on average ${relDiff(RRtotalWT, FCFStotalWT)}% higher than FCFS's.`;
+  
+  comparisonTAT.textContent = RRtotalTAT < FCFStotalTAT 
+  ? `FCFS algorithm turn around time was on average ${relDiff(FCFStotalTAT, RRtotalTAT)}% higher than Round Robin's.`
+  : `Round Robin algorithm turn around time was on average ${relDiff(RRtotalTAT, FCFStotalTAT)}% higher than FCFS's.`;
+  
 }
 
 const calculateFCFS = (durationTimes, arrivalTimes) => {
@@ -357,8 +408,8 @@ const calculateRoundRobin = (durationTimes, arrivalTimes) => {
   let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
   let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
 
-  averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(100) + 1000) / 10) / 100;
-  averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(100) + 1000) / 10) /100;
+  averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 10) / 100;
+  averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 10) /100;
 
   console.log(averageTurnAroundTime, averageWaitingTime)
 

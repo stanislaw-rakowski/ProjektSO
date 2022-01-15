@@ -3,6 +3,12 @@
     padding: 0;
 }
 
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .logo-title {
     background-color: #35312f;
     position: relative;
@@ -176,7 +182,8 @@ body * {
     flex-direction: column;
     align-items: space-around;
     justify-content: flex-start;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .input-row {
@@ -452,24 +459,24 @@ body * {
 }
 
 .comparison-modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.7); 
 }
   
 .comparison-modal-content {
     background-color: #696969;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 80%;
 }
   
 .comparison-close {
@@ -498,6 +505,7 @@ body * {
     height: 100%; 
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.7); 
+    overflow-x: hidden;
 }
   
 .test-modal-content {
@@ -507,7 +515,7 @@ body * {
     border-radius: 10px;
     border: none;
     width: 80%;
-    height: 80%;
+    height: 90%;
     display: flex;
     position: relative;
 }
@@ -547,15 +555,30 @@ body * {
     justify-content: space-around;
     align-items: center;
     border-bottom: solid 2px white;
+    border-top: solid 2px white;
 }
 
 .test-results-div {
-    height: 50%;
+    height: 40%;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 4px 0;
+}
+
+.test-comparison {
+    width: 100%;
+    height: 10%;
+    border-top: solid 2px white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1rem;
 }
 
 .test-results-title-div p {
@@ -597,7 +620,8 @@ body * {
 .processes-test-results {
     width: 100%;
     height: 100%;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
 }
