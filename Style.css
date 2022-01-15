@@ -153,7 +153,7 @@ body * {
 
 .input-row p,
 .input-row input {
-    width: 10%;
+    width: 70px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -665,7 +665,7 @@ body * {
 }
 
 .processes-test-results p {
-    width: 13%;
+    width: 80px;
     height: 100%;
     text-align: center;
     border-radius: 10px;
@@ -673,7 +673,7 @@ body * {
 }
 
 .pages-test-results-ul p {
-    width: 13%;
+    width: 80px;
     height: 100%;
     text-align: center;
     border-radius: 10px;
@@ -869,4 +869,39 @@ body * {
 
 .show {
     display: flex;
+}
+
+@media only screen and (max-width: 1440px) {
+    .test-results-title-div span h5 {
+        font-size: 1.2rem;
+    }
+    
+    .test-results-title-div span p {
+        font-size: 0.6rem;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .left-section {
+        width: 70%;
+    }
+
+    .right-section {
+        width: 30%;
+    }
+
+    .right-section * {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    body * {
+        font-size: 1rem;
+    }
+
+    .window button {
+        padding: 8px 3px;
+        font-size: 1rem;
+    }
 }
