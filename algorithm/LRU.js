@@ -12,9 +12,6 @@ capacitySlider.oninput = function() {
 }
 
 const computeHandler = () => {
-    console.log('compute')
-    console.log(capacitySlider.value);
-
     const pagesInputArray = pagesInput.value.trim().split(' ');
     const pagesArray = pagesInputArray.map(value => parseInt(value, 10));
     pagesArray.forEach(element => {
@@ -23,8 +20,6 @@ const computeHandler = () => {
             throw 'Every page must be a number!';
         } 
     });
-    
-    console.log(pagesArray);
         
     const pageFaults = calculateLRU(pagesArray, capacitySlider.value);
 
@@ -88,8 +83,6 @@ const getRandomNumber = max => {
 }
 
 randomizeBtn.addEventListener('click', () => {
-    console.log('randomize');
-
     let randomPages = '';
 
     for(let i = 0; i < getRandomNumber(8) + 7; i++) {
@@ -100,8 +93,6 @@ randomizeBtn.addEventListener('click', () => {
 });
 
 clearInputsBtn.addEventListener('click', () => {
-    console.log('clear');
-
     pagesInput.value = null;
 
     document.querySelector('.lru-page-faults-result').textContent = '...';

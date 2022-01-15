@@ -5,8 +5,6 @@ const clearInputsBtn = document.querySelector('.clear-btn-fcfs');
 
 
 const computeHandler = () => {
-    console.log('compute')
-    console.log(processCountSlider.value);
 
     const durationTimesArray = [];
     const arrivalTimesArray = [];
@@ -27,12 +25,7 @@ const computeHandler = () => {
         arrivalTimesArray.push(arrivalTime);
     }
 
-    console.log(durationTimesArray);
-    console.log(arrivalTimesArray);
-
     const [averageWaitingTime, averageTurnAroundTime, processesData] = calculateFCFS(durationTimesArray, arrivalTimesArray);
-
-    console.log(processesData);
 
     document.querySelector('.fcfs-waiting-time-result').textContent = averageWaitingTime;
     document.querySelector('.fcfs-turn-around-result').textContent = averageTurnAroundTime;
@@ -100,8 +93,6 @@ const getRandomNumber = () => {
 }
 
 randomizeBtn.addEventListener('click', () => {
-    console.log('randomize');
-
     for(let i = 1; i <= processCountSlider.value; i++) {
         document.querySelector(`.fcfs-duration-input-P${i}`).value = getRandomNumber() + 1;
         document.querySelector(`.fcfs-arrival-input-P${i}`).value = getRandomNumber();
@@ -109,8 +100,6 @@ randomizeBtn.addEventListener('click', () => {
 });
 
 clearInputsBtn.addEventListener('click', () => {
-    console.log('clear');
-
     for(let i = 1; i <= processCountSlider.value; i++) {
         document.querySelector(`.fcfs-duration-input-P${i}`).value = null;
         document.querySelector(`.fcfs-arrival-input-P${i}`).value = null;

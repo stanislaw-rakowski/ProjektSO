@@ -399,6 +399,31 @@ body * {
 
 .show-modal-div {
     height: 100px;
+    position: relative;
+}
+
+.show-modal-div a {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+}
+
+.show-modal-div img {
+    height: 40px;
+    width: auto;
+    filter: invert(1);
+}
+
+.show-modal-div img:hover {
+    filter: invert(0.8);
+}
+
+.signature {
+    color: gray;
+    font-size: 0.6rem;
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
 }
 
 .show-modal-btn {
@@ -591,6 +616,7 @@ body * {
     width: 20%;
     text-align: center;
     font-size: 1.5rem;
+    font-weight: bold;
 } 
 
 .test-results-title-div span {

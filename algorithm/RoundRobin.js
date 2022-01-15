@@ -9,8 +9,6 @@ const getRandomNumber = (max) => {
 }
 
 const computeHandler = () => {
-    console.log('compute')
-    console.log(processCountSlider.value);
 
     const durationTimesArray = [];
     const arrivalTimesArray = [];
@@ -32,12 +30,8 @@ const computeHandler = () => {
         arrivalTimesArray.push(arrivalTime);
     }
 
-    console.log(durationTimesArray);
-    console.log(arrivalTimesArray);
-
     const [averageWaitingTime, averageTurnAroundTime, processesData] = calculateRoundRobin(durationTimesArray, arrivalTimesArray, quantum);
 
-    console.log(processesData);
     document.querySelector('.rr-waiting-time-result').textContent = averageWaitingTime;
     document.querySelector('.rr-turn-around-result').textContent = averageTurnAroundTime;
 }
@@ -96,8 +90,6 @@ const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 
     averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 10) / 100;
     averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 10) /100;
-
-    console.log(averageTurnAroundTime, averageWaitingTime)
 
     return [averageWaitingTime, averageTurnAroundTime, processesData];
 }
@@ -217,8 +209,6 @@ const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 computeBtn.addEventListener('click', computeHandler);
 
 randomizeBtn.addEventListener('click', () => {
-    console.log('randomize');
-
     for(let i = 1; i <= processCountSlider.value; i++) {
         document.querySelector(`.rr-duration-input-P${i}`).value = getRandomNumber(20) + 1;
         document.querySelector(`.rr-arrival-input-P${i}`).value = getRandomNumber(20);
@@ -226,8 +216,6 @@ randomizeBtn.addEventListener('click', () => {
 });
 
 clearInputsBtn.addEventListener('click', () => {
-    console.log('clear');
-
     for(let i = 1; i <= processCountSlider.value; i++) {
         document.querySelector(`.rr-duration-input-P${i}`).value = null;
         document.querySelector(`.rr-arrival-input-P${i}`).value = null;
