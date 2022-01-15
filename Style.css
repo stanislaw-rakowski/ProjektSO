@@ -188,7 +188,7 @@ body * {
 
 .input-row {
     width: 100%;
-    height: 30px;
+    min-height: 30px;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -506,6 +506,7 @@ body * {
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.7); 
     overflow-x: hidden;
+    overflow-y: hidden;
 }
   
 .test-modal-content {
@@ -576,18 +577,44 @@ body * {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 4px;
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
-.test-results-title-div p {
+.test-comparison p {
+    margin: 3px;
+}
+
+.test-results-title-div > p {
+    width: 20%;
+    text-align: center;
+    font-size: 1.5rem;
+} 
+
+.test-results-title-div span {
     height: 100%;
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.test-results-title-div span h5 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.test-results-title-div span p {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 0.8rem;
 }
 
 .test-results {

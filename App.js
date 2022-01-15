@@ -1,6 +1,5 @@
 const processCountSliderFCFS = document.querySelector('.process-count-range-fcfs');
 const countOutputFCFS = document.querySelector('.process-count-output-fcfs');
-const compareCheckboxFCFS = document.querySelector('.compare-checkbox-fcfs');
 const inputsDivFCFS = document.querySelector('.inputs-div-fcfs');
 
 countOutputFCFS.textContent = processCountSliderFCFS.value;
@@ -23,18 +22,8 @@ processCountSliderFCFS.oninput = function() {
     }
 }
 
-
-compareCheckboxFCFS.addEventListener('change', function() {
-    if (this.checked) {
-      console.log("Checkbox is checked..");
-    } else {
-      console.log("Checkbox is not checked..");
-    }
-});
-
 const processCountSliderRR = document.querySelector('.process-count-range-rr');
 const countOutputRR = document.querySelector('.process-count-output-rr');
-const compareCheckboxRR = document.querySelector('.compare-checkbox-rr');
 const inputsDivRR = document.querySelector('.inputs-div-rr');
 
 countOutputRR.textContent = processCountSliderRR.value;
@@ -57,40 +46,28 @@ processCountSliderRR.oninput = function() {
     }
 }
 
-compareCheckboxRR.addEventListener('change', function() {
-    if (this.checked) {
-      console.log("Checkbox is checked..");
-    } else {
-      console.log("Checkbox is not checked..");
-    }
-});
-
-
-const comparisonModal = document.querySelector('.comparison-modal');
-const comparisonBtn = document.querySelector('.show-modal-btn');
-const closeComparisonModalSpan = document.getElementsByClassName('comparison-close')[0];
-
-comparisonBtn.onclick = function() {
-  comparisonModal.style.display = "block";
-}
-closeComparisonModalSpan.onclick = function() {
-  comparisonModal.style.display = "none";
-}
-
 const testModal = document.querySelector('.test-modal');
 const testBtn = document.querySelector('.test-btn');
 const closeTestModalSpan = document.getElementsByClassName('test-close')[0];
 
-closeTestModalSpan.onclick = function() {
-  testModal.style.display = "none";
+let proChart;
+let pagChart;
+
+const modalClosingHandler = () => {
+  testModal.style.display = 'none';
+  document.body.style.position = '';
+  document.body.style.top = '';
+  proChart.destroy();
+  pagChart.destroy();
 }
+
+closeTestModalSpan.onclick = function() {
+  modalClosingHandler();
+}
+
 window.onclick = function(event) {
   if (event.target == testModal) {
-    testModal.style.display = "none";
-  }
-
-  if (event.target == comparisonModal) {
-    comparisonModal.style.display = "none";
+    modalClosingHandler();
   }
 }
 
@@ -103,7 +80,9 @@ const relDiff = (a, b) => {
 }
 
 const testHandler = () => {
-  testModal.style.display = "flex";
+  testModal.style.display = 'flex';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${window.scrollY}px`;
 
   testProcesses();
   testPages();
@@ -132,7 +111,7 @@ const testPages = () => {
     xValues.push(i);
   }
 
-  new Chart("myChartPages", {
+  pagChart = new Chart("myChartPages", {
     type: "line",
     data: {
       labels: xValues,
@@ -160,6 +139,7 @@ const testPages = () => {
       hover: {mode: null}
     }
   });
+  document.getElementById('myChartPages').style.height = "85%";
 
   const resultsList = document.querySelector('.pages-test-results-ul');
   resultsList.innerHTML = '';
@@ -181,9 +161,6 @@ const testPages = () => {
   }
 
   const comparison = document.querySelector('.test-comparison-pages');
-
-  console.log('lru', totalLRUpageFaults)
-  console.log('fifo', totalFIFOpageFaults)
   
   comparison.textContent = totalLRUpageFaults < totalFIFOpageFaults 
   ? `FIFO algorithm had on average ${relDiff(totalFIFOpageFaults, totalLRUpageFaults)}% more page faults than LRU.`
@@ -225,7 +202,7 @@ const testProcesses = () => {
     xValues.push(i);
   }
 
-  new Chart("myChart", {
+  proChart = new Chart("myChart", {
     type: "line",
     data: {
       labels: xValues,
@@ -252,6 +229,7 @@ const testProcesses = () => {
       hover: {mode: null}
     }
   });
+  document.getElementById('myChart').style.height = "85%";
 
   const resultsList = document.querySelector('.processes-test-results');
   resultsList.innerHTML = '';
@@ -285,12 +263,6 @@ const testProcesses = () => {
     return Math.round(Math.abs((a - b) / ((a + b) / 2)) * 10000) / 100;
   }
 
-  console.log('rr wt', RRtotalWT)
-  console.log('rr tat', RRtotalTAT)
-  console.log('ff wt', FCFStotalWT)
-  console.log('ff tat', FCFStotalTAT)
-
-  
   comparisonWT.textContent = RRtotalWT < FCFStotalWT 
   ? `FCFS algorithm waiting time was on average ${relDiff(FCFStotalWT, RRtotalWT)}% higher than Round Robin's.`
   : `Round Robin algorithm waiting time was on average ${relDiff(RRtotalWT, FCFStotalWT)}% higher than FCFS's.`;
@@ -410,8 +382,6 @@ const calculateRoundRobin = (durationTimes, arrivalTimes) => {
 
   averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 10) / 100;
   averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 10) /100;
-
-  console.log(averageTurnAroundTime, averageWaitingTime)
 
   return [averageWaitingTime, averageTurnAroundTime];
 }

@@ -254,7 +254,7 @@
     <div class="comparison-modal">
         <div class="comparison-modal-content">
             <span class="comparison-close">&times;</span>
-            <p>Some text in the comparison Modal..</p>
+            <ul class="comparison-ul"></ul>
         </div>
     </div>
 
@@ -263,14 +263,20 @@
             <span class="test-close">&times;</span>
             <div class="test-section processes-section">
                 <div class="chart-div processes-chart-div">
-                    <canvas id="myChart" style="width:100%;height:90%"></canvas>
+                    <canvas id="myChart" style="width:100%;height:85%"></canvas>
                 </div>
                 <div class="test-results-title-div">
                     <p>nr</p>
-                    <p>FCFS WT</p>
-                    <p>FCFS TAT</p>
-                    <p>RR WT</p>
-                    <p>RR TAT</p>
+                    <span>
+                        <h5>FCFS</h5>
+                        <p>waiting time</p>
+                        <p>turn around time</p>
+                    </span>
+                    <span>
+                        <h5>Round Robin</h5>
+                        <p>waiting time</p>
+                        <p>turn around time</p>
+                    </span>
                 </div>
                 <div class="test-results-div processes-test-results-div">
                     <ul class="processes-test-results"></ul>
@@ -282,7 +288,7 @@
             </div>
             <div class="test-section pages-section">
                 <div class="chart-div pages-chart-div">
-                    <canvas id="myChartPages" style="width:100%;height:90%"></canvas>
+                    <canvas id="myChartPages" style="width:100%;height:85%"></canvas>
                 </div>
                 <div class="test-results-title-div">
                     <p>nr</p>
@@ -305,6 +311,7 @@
     <script type="module" src="algorithm/RoundRobin.js"></script>
     <script type="module" src="algorithm/FIFO.js"></script>
     <script type="module" src="algorithm/LRU.js"></script>
+    <script type="module" src="comparison.js"></script>
 
 </body>
 
