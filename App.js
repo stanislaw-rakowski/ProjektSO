@@ -132,7 +132,13 @@ const testPages = () => {
           display: true,
           ticks: {
             suggestedMax: 12,
-            suggestedMin: 5 
+            suggestedMin: 5,
+            fontColor: "lightgray" 
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontColor: "lightgray"
           }
         }]
       },
@@ -226,7 +232,19 @@ const testProcesses = () => {
     },
     options: {
       legend: {display: false},
-      hover: {mode: null}
+      hover: {mode: null},
+      scales: {
+        yAxes: [{
+          ticks: {
+            fontColor: "lightgray"
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            fontColor: "lightgray"
+          }
+        }]
+      }
     }
   });
   document.getElementById('myChart').style.height = "85%";
