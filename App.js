@@ -264,12 +264,12 @@ const testProcesses = () => {
   }
 
   comparisonWT.textContent = RRtotalWT < FCFStotalWT 
-  ? `FCFS algorithm waiting time was on average ${relDiff(FCFStotalWT, RRtotalWT)}% higher than Round Robin's.`
-  : `Round Robin algorithm waiting time was on average ${relDiff(RRtotalWT, FCFStotalWT)}% higher than FCFS's.`;
+  ? `FCFS's algorithm waiting time was on average ${relDiff(FCFStotalWT, RRtotalWT)}% higher than Round Robin's.`
+  : `Round Robin's algorithm waiting time was on average ${relDiff(RRtotalWT, FCFStotalWT)}% higher than FCFS's.`;
   
   comparisonTAT.textContent = RRtotalTAT < FCFStotalTAT 
-  ? `FCFS algorithm turn around time was on average ${relDiff(FCFStotalTAT, RRtotalTAT)}% higher than Round Robin's.`
-  : `Round Robin algorithm turn around time was on average ${relDiff(RRtotalTAT, FCFStotalTAT)}% higher than FCFS's.`;
+  ? `FCFS's algorithm turn around time was on average ${relDiff(FCFStotalTAT, RRtotalTAT)}% higher than Round Robin's.`
+  : `Round Robin's algorithm turn around time was on average ${relDiff(RRtotalTAT, FCFStotalTAT)}% higher than FCFS's.`;
   
 }
 
