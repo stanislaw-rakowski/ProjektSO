@@ -126,6 +126,7 @@ const testPages = () => {
       }]
     },
     options: {
+      responsive: true,
       legend: {display: false},
       scales: {
         yAxes: [{
@@ -208,6 +209,7 @@ const testProcesses = () => {
     xValues.push(i);
   }
 
+  let delayed;
   proChart = new Chart("myChart", {
     type: "line",
     data: {
@@ -231,6 +233,7 @@ const testProcesses = () => {
       }]
     },
     options: {
+      responsive: true,
       legend: {display: false},
       hover: {mode: null},
       scales: {
