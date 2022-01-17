@@ -3,7 +3,6 @@ const processCountSlider = document.querySelector('.process-count-range-fcfs');
 const randomizeBtn = document.querySelector('.random-data-btn-fcfs');
 const clearInputsBtn = document.querySelector('.clear-btn-fcfs');
 
-
 const computeHandler = () => {
 
     const durationTimesArray = [];

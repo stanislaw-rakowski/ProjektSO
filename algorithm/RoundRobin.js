@@ -38,62 +38,6 @@ const computeHandler = () => {
 
 const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 
-//     const processesCount = arrivalTimes.length;
-//     const waitingTimes = new Array(processesCount);
-//     const turnAroundTimes = new Array(processesCount);
-
-//     const serviceTime = new Array(processesCount);
-//     serviceTime[0] = arrivalTimes[0];
-//     waitingTimes[0] = 0;
-  
-//     for (let i = 1; i < processesCount; i++) {
-//         let wastedTime = 0;
-
-//         serviceTime[i] = serviceTime[i - 1] + durationTimes[i - 1];
-//         waitingTimes[i] = serviceTime[i] - arrivalTimes[i];
- 
-//         if (waitingTimes[i] < 0) {
-//             wastedTime = Math.abs(waitingTimes[i]);
-//             waitingTimes[i] = 0;
-//         }
-
-//         serviceTime[i] = serviceTime[i] + wastedTime;
-//     }
-
-//     for (let i = 0; i < processesCount; i++) {
-//         turnAroundTimes[i] = durationTimes[i] + waitingTimes[i];
-//     }
-
-//     let totalWaitingTime = 0;
-//     let totalTurnAroundTime = 0;
-//     let completionTime = 0;
-//     const processesData = [];
-    
-//     for (let i = 0 ; i < processesCount; i++) {
-//         totalWaitingTime += waitingTimes[i];
-//         totalTurnAroundTime += turnAroundTimes[i];
-        
-//         completionTime = turnAroundTimes[i] + arrivalTimes[i];
-        
-//         processesData.push({
-//             number: i + 1,
-//             duration: durationTimes[i],
-//             arrivalTime: arrivalTimes[i],
-//             waitingTime: waitingTimes[i],
-//             turnAroundTime: turnAroundTimes[i],
-//             timeWhenCompleted: completionTime
-//         });
-//     }
-    
-//     let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
-//     let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
-
-//     // averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 10) / 100;
-//     // averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 10) /100;
-
-//     return [averageWaitingTime, averageTurnAroundTime, processesData];
-// }
-
     const processesCount = arrivalTimes.length;
     const waitingTimes = new Array(processesCount);
     const turnAroundTimes = new Array(processesCount);
@@ -150,6 +94,7 @@ const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
     return [averageWaitingTime, averageTurnAroundTime, processesData];
 }
 
+// LAST TRY OF ROUND ROBIN ALGORITHM
 
 //     const findElement = (queue, i) => {
 //         while(!queue.length) {
@@ -161,29 +106,26 @@ const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 //         return false;
 //     }
 
-//     console.log('arr', arrivalTimes)
 //     const processes = [];
 //     const queue = [];
 //     const processesCount = arrivalTimes.length;
 //     let time;
 
-//     for(let i = 0; i < processesCount * 2; i++) {
+//     for(let i = 0; i < processesCount; i++) {
 //         processes.push({
 //             id: i + 1,
-//             arrivalTime: arrivalTimes[i] || 1,
-//             durationTime: durationTimes[i] || 1,
-//             tempDurationTime: durationTimes[i] || 1,
+//             arrivalTime: arrivalTimes[i],
+//             durationTime: durationTimes[i],
+//             tempDurationTime: durationTimes[i],
 //             waitingTime: 0,
 //             turnAroundTime: 0,
 //             completionTime: 0
 //         })
 //     }
     
-//     console.log(processes)
 //     processes.sort((a, b) => {
 //         return a.arrivalTime - b.arrivalTime;
 //     })
-//     console.log('sorted processes', processes);
 
 //     queue.push(0);
 
@@ -205,10 +147,8 @@ const calculateRoundRobin = (durationTimes, arrivalTimes, quantum) => {
 //             time = time + quantum;
 //         }
 
-//         i = queue[-1] + 1;
-//         //console.log(queue)
-//         //console.log(processes[i].arrivalTime)
-        
+//         i = queue[0] + 1;
+    
 //         while(processes[i].arrivalTime <= time &&i < processesCount && processes[i].durationTime != 0) {
 
 //             if(!findElement(queue, i)) {
