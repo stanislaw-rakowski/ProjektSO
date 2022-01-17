@@ -963,4 +963,28 @@ body * {
         padding: 8px 3px;
         font-size: 1rem;
     }
+
+    .test-modal-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .test-modal-content * {
+        font-size: 0.5rem;
+    }
+
+    .test-section {
+        width: 100%;
+        height: 50%;
+        border: none;
+    }
+
+    .test-results-title-div p,
+    .test-results-title-div span h5 {
+        font-size: 0.5rem;
+    }
+
+    .test-results-title-div span p {
+        font-size: 0.3rem;
+    }
 }

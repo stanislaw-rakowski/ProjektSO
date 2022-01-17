@@ -3,40 +3,25 @@ const compareCheckboxRR = document.querySelector('.compare-checkbox-rr');
 const compareCheckboxFIFO = document.querySelector('.compare-checkbox-fifo');
 const compareCheckboxLRU = document.querySelector('.compare-checkbox-lru');
 
-
-// compareCheckboxFCFS.addEventListener('change', function() {
-//     if (this.checked) {
-//       console.log("Checkbox is checked..");
-//     } else {
-//       console.log("Checkbox is not checked..");
-//     }
-// });
-
-
-// compareCheckboxRR.addEventListener('change', function() {
-//     if (this.checked) {
-//       console.log("Checkbox is checked..");
-//     } else {
-//       console.log("Checkbox is not checked..");
-//     }
-// });
-
-
 const comparisonModal = document.querySelector('.comparison-modal');
 const comparisonBtn = document.querySelector('.show-modal-btn');
 const closeComparisonModalSpan = document.getElementsByClassName('comparison-close')[0];
 
-closeComparisonModalSpan.onclick = function() {
+const modalClosingHandler = () => {
+  document.querySelector('.comparison-modal-content').scrollTo(0, 0);
   comparisonModal.style.display = 'none';
   document.body.style.position = '';
   document.body.style.bottom = '0';
+  window.scrollTo(0, 2000);
+}
+
+closeComparisonModalSpan.onclick = function() {
+  modalClosingHandler();
 }
 
 window.addEventListener('click', (event) => {
     if (event.target == comparisonModal) {
-      comparisonModal.style.display = 'none';
-      document.body.style.position = '';
-      document.body.style.bottom = '0';
+      modalClosingHandler();
     }
 })
 
@@ -107,7 +92,7 @@ const comparisonHandler = () => {
   const FIFOinfo = compareCheckboxFIFO.checked ? algsDetailedInfo.fifo : '';
   const LRUinfo = compareCheckboxLRU.checked ? algsDetailedInfo.lru : '';
 
-  if(FCFSinfo && RRinfo && FIFOinfo && LRUinfo) {
+  if(FCFSinfo || RRinfo || FIFOinfo || LRUinfo) {
     comparisonUl.innerHTML = FCFSinfo + RRinfo + FIFOinfo + LRUinfo;
   } else {
     comparisonUl.innerHTML = `
