@@ -16,8 +16,8 @@ const computeHandler = () => {
     const pagesArray = pagesInputArray.map(value => parseInt(value, 10));
     pagesArray.forEach(element => {
         if(isNaN(element)) {
-            window.alert('Every page must be a number!');
-            throw 'Every page must be a number!';
+            window.alert('Invalid input!');
+            throw 'Invalid input!';
         } 
     });
         

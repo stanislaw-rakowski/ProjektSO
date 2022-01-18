@@ -800,6 +800,10 @@ body * {
     opacity: 1;
 }
 
+input {
+    font-weight: bold;
+}
+
 /* FCFS colors */
 
 .alg-title-fcfs {
