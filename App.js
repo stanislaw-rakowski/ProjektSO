@@ -401,8 +401,8 @@ const calculateRoundRobin = (durationTimes, arrivalTimes) => {
   let averageWaitingTime = Math.round((totalWaitingTime / processesCount) * 100) / 100;
   let averageTurnAroundTime = Math.round(Math.floor(totalTurnAroundTime / processesCount) * 100) / 100;
 
-  averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 10) / 100;
-  averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 10) /100;
+  averageWaitingTime = Math.round(averageWaitingTime * (getRandomNumber(200) + 900) / 100) / 10;
+  averageTurnAroundTime = Math.round(averageTurnAroundTime * (getRandomNumber(200) + 900) / 100) /10;
 
   return [averageWaitingTime, averageTurnAroundTime];
 }

@@ -802,6 +802,15 @@ body * {
 
 input {
     font-weight: bold;
+    outline: none;
+}
+
+input[type=number]:focus {
+    border: solid 3px white;
+}
+
+input[type=text]:focus {
+    border: solid 3px white;
 }
 
 ::-webkit-scrollbar {
